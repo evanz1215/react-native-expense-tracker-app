@@ -29,3 +29,10 @@ export async function fetchExpenses() {
 
   return expenses;
 }
+
+export function updateExpense(id, expenseData) {
+  return instance.put(`/expenses/${id}.json`, expenseData);
+}
+export async function deleteExpense(id) {
+  return instance.delete(`/expenses/${id}.json`);
+}
