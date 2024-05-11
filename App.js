@@ -1,3 +1,4 @@
+import "react-native-reanimated";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -44,14 +45,7 @@ function ExpensesOverview() {
           title: "Recent Expenses",
           tabBarLabel: "Recent",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="hourglass"
-              size={size}
-              color={color}
-              onPress={() => {
-                navigation.navigate("ManageExpense");
-              }}
-            />
+            <Ionicons name="hourglass" size={size} color={color} />
           ),
         }}
       />
@@ -75,7 +69,14 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: GlobalStyles.colors.primary500,
+            },
+            headerTintColor: "#fff",
+          }}
+        >
           <Stack.Screen
             name="ExpensesOverview"
             component={ExpensesOverview}
@@ -83,7 +84,14 @@ export default function App() {
               headerShown: false,
             }}
           />
-          <Stack.Screen name="ManageExpense" component={ManageExpense} />
+          <Stack.Screen
+            name="ManageExpense"
+            component={ManageExpense}
+            options={{
+              title: "Manage Expense",
+              presentation: "modal",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
